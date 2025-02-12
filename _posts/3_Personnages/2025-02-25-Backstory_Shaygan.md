@@ -1,2 +1,0 @@
-# Shaygan
-## Mage Humain - Amnésique

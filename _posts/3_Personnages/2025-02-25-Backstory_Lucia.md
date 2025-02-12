@@ -1,2 +1,0 @@
-# Lucia
-## Paladin - Humaine

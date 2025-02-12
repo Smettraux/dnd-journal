@@ -1,3 +1,10 @@
+---
+layout: post
+title:  "Personnage - John MacKenzie"
+date:   2025-02-11 15:49:05 +0100
+category: "Personnage"
+---
+
 # John MacKenzie
 ## Rôdeur, Ancien soldat
 

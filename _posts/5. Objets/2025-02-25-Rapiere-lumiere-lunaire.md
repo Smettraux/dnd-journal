@@ -1,3 +1,10 @@
+---
+layout: post
+title:  "Objet - Rapière de lumière lunaire"
+date:   2025-02-11 15:49:05 +0100
+category: Objet Armement
+---
+
 # Rapière de lumière lunaire
 Arme d'Athgar, forgée sous la lumière des lunes.
 

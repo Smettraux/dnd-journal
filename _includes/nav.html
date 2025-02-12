@@ -1,11 +1,12 @@
 <div class="container">
   <ul id="navlist" class="left">
     <li {% if page.url == "/" %}class="active"{% endif %}><a href="{{ site.baseurl }}/">Préface</a></li>
-    <li {% if page.url == "/about/" %}class="active"{% endif %}><a href="{{ site.baseurl }}/about/">abt</a></li>
+    <li {% if page.url == "/personnages/" %}class="active"{% endif %}><a href="{{ site.baseurl }}/personnages/">Personnages</a></li>
+    <!-- <li {% if page.url == "/about/" %}class="active"{% endif %}><a href="{{ site.baseurl }}/about/">abt</a></li>
     <li {% if page.url == "/_posts/" %}class="active"{% endif %}><a href="{{ site.baseurl }}/_posts/">posts</a></li>
     <li><a href="{{ site.baseurl }}/feed.xml">rss</a></li>
     {% for nav in site.data.nav.social %}
     <li><a href="{{ nav.href }}" target="_blank">{{ nav.title }}</a></li>
-    {% endfor %}
+    {% endfor %} -->
   </ul>
 </div>
