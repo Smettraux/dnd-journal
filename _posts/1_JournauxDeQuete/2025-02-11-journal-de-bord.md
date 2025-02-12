@@ -1,5 +1,12 @@
-# Journal d'Athgar
-## 2025.02.11 - (Session 1)
+---
+layout: post
+title:  "Session 1 - Le Rite de passage de Vetrgard"
+date:   2025-02-11 15:49:05 +0100
+categories: "Journal de bord sss"
+category: "Journal de bord"
+---
+
+# Journal d'Athgar - Session 1
 
 Aujourd'hui, au détour de mon chemin pour la cérémonie annuelle du village de Vetrgard, j'ai rencontré mes compagnons.
 J'avais déjà aperçu certains de leurs visages, mais c'est la première fois que nous nous retrouvons tous ensemble.
@@ -68,28 +75,26 @@ Les bêtes semblent désorientées. La plus grande, le chef, semble hésiter. El
 Après une seconde qui me semble une éternité, elle se lance vers nous avec 3 de ses sbires...
 
 ### COMBAT
-
-1. **Athgar** - Dissonant Whisper on wolf 3 - Wis13 → hits - 6 DMG
-Bardic inspiration on John
-2. **John** - Marque du chasseur sur le wolf 1
-Attaque a l'arbalète sur le wolf 1 - MISS
-3. **Eileen** - Tente de frapper un wolf 1 au quarterstaff - 7 DMG
-> le loup est blessé et titube
-4. **Shaygan** - Protège Eileen du wolf 1, et attaque avec son harpon - MISS
-5. **Lucia** - Attaque le wolf 1 - MISS
-
-6. **Wolf 3** - s'enfuit
-7. **Wolf 1** - Attaque Shaygan - 6 DMG
-8. **Wolf 2** - Attaque Lucia - MISS
-9. **Athgar** - Vicious Mockery Wolf 1 - MISS
-10. **John** - Arbalète Wolf 2 - MISS
-11. **Eileen** - QStaff Wolf 1 - 3 DMG
-> le loup s'écroule, mais n'est pas mort
-> Eileen tente de pousser le loup dans l'eau, mais n'y arrive pas.
-12. **Shaygan** - prefère s'assoir et se concentrer sur sa plaie.
-13. **Lucia** - Attaque Wolf 2 - 7 DMG
-7. **Wolf 2** - Attaque Lucia - MISS
-> Le loup tente une fuite, mais Lucia tente une attaque d'opportunité - MISS
+|Attaquant|Action|Cible|Hit/Miss|DMG|
+|--|--|--|--|--|
+|**Athgar**|Murmures dissonants|Wolf 3|Hit|6|
+|**John**|Marque du chasseur|Wolf 1| | |
+|**John**|Attaque arbalète|Wolf 1|Miss| |
+|**Eileen**|Attaque au bâton|Wolf 1|Hit|7|
+||Le loup s'écroule, mais n'est pas mort|
+||Eileen tente de pousser le loup dans l'eau, mais n'y arrive pas.|
+|**Shaygan**|Attaque au harpon|Wolf 1|Miss| |
+|**Lucia**|Attaque à l'épée|Wolf 1|Miss| |
+|**Wolf 3**|Prend la fuite| | | |
+|**Wolf 1**|Attaque|Shaygan|Hit|6|
+|**Wolf 2**|Attaque|Lucia|Miss| |
+|**Athgar**|Moquerie vicieuse|Wolf 1|Miss| |
+|**John**|Attaque arbalète|Wolf 2|Miss| |
+|**Eileen**|Attaque au bâton|Wolf 1|Hit|3|
+|**Shaygan**|S'assoit en retrait pour panser ses plaies| | | |
+|**Lucia**|Attaque à la masse|Wolf 2|Hit|7|
+|**Wolf 2**|Attaque|Lucia|Miss| |
+||Le loup essaie de s'enfuir, Lucia tente une attaque d'opportunité|| MISS|
 
 ------- FIN DU COMBAT -------
 Les loups s'enfuient, et nous nous retrouvons en paix dans le village.
@@ -140,4 +145,3 @@ Nous écoutons les mises en garde de Sigrun
 Nous partons donc pour la ville, et nous nous préparons à affronter les dangers de la rivière.
 
 !lvlup! - 2
-## 2025.02.25 - (Session 2)
