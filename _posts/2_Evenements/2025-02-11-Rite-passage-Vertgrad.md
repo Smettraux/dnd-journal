@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "Evénement - Le Rite de passage de Vetrgard"
+title:  "Evenement - Le Rite de passage de Vetrgard"
 date:   2025-02-11 15:49:05 +0100
-category: "Evénement"
+category: "Evenement"
 ---
 
 # Cérémonie annuelle de Vetrgard - Rite de passage
@@ -17,4 +17,4 @@ Mère Sigrund, Chamane du village, nous dit que les esprits disent que les temps
 Il est temps pour nous de nous présenter, et de raconter notre histoire. Puis l'on nous explique l'épreuve à laquelle nous devons nous soumettre.
 Nous devons nous rendre dans une cabane en forêt, y passer une nuit en méditation, et revenir au village.
 
-[**Retour à la session 1**](../1_JournauxDeQuete/2025-02-11-session-1.md)
+[**Retour à la session 1**](/journal%20de%20bord/2025/02/11/session-1.html)
