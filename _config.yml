@@ -23,7 +23,7 @@ email: mettrauxsteve@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   Journal de campagne, <br>
   Par Athgar Claire-Lune, éminent barde nain.
-baseurl: "/dnd-journal.io" # the subpath of your site, e.g. /blog
+baseurl: "/dnd-journal" # the subpath of your site, e.g. /blog
 url: "https://smettraux.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
 # twitter_username: jekyllrb
 github_username:  Smettraux
