@@ -38,7 +38,7 @@ title: {{ page.folder }}
 
     <!-- Debugging output: Post Path and Folder Path -->
     <p>Post Path: {{ post.path }}</p>
-    <p>Folder Parts: {{ folder_parts | join: "/" }}</p>
+    <p>Folder Parts: {{ folder_parts | join: "-" }}</p>
 
     {% assign post_folder_path = folder_parts | join: "/" %}
 
