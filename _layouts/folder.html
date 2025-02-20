@@ -23,7 +23,7 @@ title: {{ page.folder }}
         <!-- Filter posts inside the target folder -->
         {% for post in site.posts %}
             {% assign post_path_parts = post.path | split: "/" %}
-            {% assign post_folder = post_path_parts[0] %}  <!-- Adjust index based on your structure -->
+            {% assign post_folder = post_path_parts[1] %}  <!-- Adjust index based on your structure -->
 
             {% if post_folder == target_folder %}
                 {% assign folder_posts = folder_posts | push: post %}
