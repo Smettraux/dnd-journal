@@ -5,72 +5,74 @@ title: {{ page.folder }}
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{ page.title }}</title>
-    {% include header.html %}
-    {% seo %}
+  <title>{{ page.title }}</title>
+  {% include header.html %}
+  {% seo %}
 </head>
 <body>
+  {% include nav.html %}
 
-{% include nav.html %}
-
-<div class="container">
+  <div class="container">
     {% assign target_folder = page.folder %}
     <h1>{{ target_folder }}</h1>
 
+    {% comment %}
+    Step 1: Filter posts inside the target folder.
+    {% endcomment %}
+    {% assign folder_posts = "" | split: "" %}
+    {% for post in site.posts %}
+      {% assign parts = post.path | split: "/" %}
+      {%- comment -%}
+      Here we assume:
+       - For posts in "3. Personnages": parts[0] = "3. Personnages"
+       - For nested posts: parts[0] = "3. Personnages", parts[1] = subfolder, parts[2] = filename
+      {%- endcomment -%}
+      {% if parts[0] == target_folder %}
+        {% assign folder_posts = folder_posts | push: post %}
+      {% endif %}
+    {% endfor %}
+
+    {% comment %}
+    Step 2: Group posts by subfolder.
+      - If only 2 parts, group as "Uncategorized"
+      - If more than 2 parts, group using parts[1] as the subfolder.
+    {% endcomment %}
+    {% assign groups = {} %}
+    {% for post in folder_posts %}
+      {% assign parts = post.path | split: "/" %}
+      {% if parts.size == 2 %}
+        {% assign group_key = "Uncategorized" %}
+      {% else %}
+        {% assign group_key = parts[1] %}
+      {% endif %}
+
+      {% if groups[group_key] %}
+        {% assign groups[group_key] = groups[group_key] | push: post %}
+      {% else %}
+        {% comment %}
+        Create a new array with the post.
+        {% endcomment %}
+        {% assign groups = groups | merge: {{ group_key | jsonify }}: [post] %}
+      {% endif %}
+    {% endfor %}
+
+    {% comment %}
+    Step 3: Display the grouped posts.
+    {% endcomment %}
     <ul>
-        {% assign folder_posts = "" | split: "" %}
-
-        <!-- Filter posts inside the target folder -->
-        {% for post in site.posts %}
-            {% assign post_path_parts = post.path | split: "/" %}
-            {% assign post_folder = post_path_parts[1] %}  <!-- Adjust index based on your structure -->
-
-            {% if post_folder == target_folder %}
-                {% assign folder_posts = folder_posts | push: post %}
-            {% endif %}
-        {% endfor %}
-
-        <!-- Group by subfolder -->
-        {% assign grouped_posts = "" | split: "" %}
-
-        {% for post in folder_posts %}
-            {% assign post_parts = post.path | split: "/" %}
-            {% assign subfolder = post_parts[2] | default: "Uncategorized" %}
-
-            {% capture group_key %}{{ subfolder }}{% endcapture %}
-            {% assign existing_group = false %}
-
-            {% for group in grouped_posts %}
-                {% if group[0] == group_key %}
-                    {% assign existing_group = true %}
-                    {% break %}
-                {% endif %}
+      {% for group in groups %}
+        <li>
+          <h2>{{ group[0] }}</h2>
+          <ul>
+            {% for post in group[1] %}
+              <li><a href="{{ post.url }}">{{ post.title }}</a></li>
             {% endfor %}
-
-            {% if existing_group %}
-                {% assign grouped_posts[group_key] = grouped_posts[group_key] | push: post %}
-            {% else %}
-                {% assign grouped_posts = grouped_posts | push: group_key %}
-                {% assign grouped_posts[group_key] = "" | split: "" | push: post %}
-            {% endif %}
-        {% endfor %}
-
-        <!-- Display grouped posts -->
-        {% for group in grouped_posts %}
-            <li>
-                <h2>{{ group }}</h2>
-                <ul>
-                    {% for post in grouped_posts[group] %}
-                        <li><a href="{{ post.url }}">{{ post.title }}</a></li>
-                    {% endfor %}
-                </ul>
-            </li>
-        {% endfor %}
+          </ul>
+        </li>
+      {% endfor %}
     </ul>
+  </div>
 
-</div>
-
-{% include foot.html %}
-
+  {% include foot.html %}
 </body>
 </html>
