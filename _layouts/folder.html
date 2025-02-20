@@ -4,93 +4,73 @@ title: {{ page.folder }}
 
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title>{{ page.title }}</title>
     {% include header.html %}
     {% seo %}
-  </head>
-  <body>
+</head>
+<body>
 
-    {% include nav.html %}
+{% include nav.html %}
 
+<div class="container">
+    {% assign target_folder = page.folder %}
+    <h1>{{ target_folder }}</h1>
 
-    <div class="container">
-      {% assign target_folder = page.folder %}
-<h1>{{ target_folder }}</h1>
+    <ul>
+        {% assign folder_posts = "" | split: "" %}
 
-<ul>
-  {% assign folder_posts = "" | split: "" %}
+        <!-- Filter posts inside the target folder -->
+        {% for post in site.posts %}
+            {% assign post_path_parts = post.path | split: "/" %}
+            {% assign post_folder = post_path_parts[1] %}  <!-- Adjust index based on your structure -->
 
-  {% for post in site.posts %}
-    {% assign parts = post.path | split: "/" %}
-
-    <!-- Extract the folder parts excluding the file name -->
-    {% assign folder_parts = "" | split: "" %}
-    {% assign folder_parts = folder_parts | push: parts[1] %}
-
-    {% if parts.size > 2 %}
-      {% assign folder_parts = folder_parts | push: parts[2] %}
-    {% endif %}
-
-    {% if parts.size > 3 %}
-      {% assign folder_parts = folder_parts | push: parts[3] %}
-    {% endif %}
-
-    <!-- Debugging output: Post Path and Folder Path -->
-    <p>Post Path: {{ post.path }}</p>
-    <p>Folder Parts: {{ folder_parts | join: "-" }}</p>
-
-    {% assign post_folder_path = folder_parts | join: "/" %}
-
-    {% if post_folder_path == target_folder %}
-      {% assign folder_posts = folder_posts | push: post %}
-    {% endif %}
-  {% endfor %}
-
-  <!-- Now, group by subfolders (e.g., Vertgrad under 3. Personnages) -->
-  {% assign grouped_posts = "" | split: "" %}
-
-  {% for post in folder_posts %}
-    {% assign parts = post.path | split: "/" %}
-
-    <!-- Extract subfolder (e.g., second folder in hierarchy) -->
-    {% assign subfolder = parts[2] %}
-
-    <!-- Check if the group for this subfolder exists, create it if not -->
-    {% assign group_exists = false %}
-    {% assign group_index = 0 %}
-
-    {% for group in grouped_posts %}
-      {% if group[0] == subfolder %}
-        {% assign group_exists = true %}
-        {% break %}
-      {% endif %}
-      {% assign group_index = group_index | plus: 1 %}
-    {% endfor %}
-
-    {% if group_exists %}
-      {% assign grouped_posts[group_index][1] = grouped_posts[group_index][1] | push: post %}
-    {% else %}
-      {% assign grouped_posts = grouped_posts | push: subfolder | split: "" %}
-      {% assign grouped_posts = grouped_posts | push: "" | split: "" %}
-      {% assign grouped_posts[group_index][1] = grouped_posts[group_index][1] | push: post %}
-    {% endif %}
-  {% endfor %}
-
-  <!-- Display the grouped posts by subfolder -->
-  {% for group in grouped_posts %}
-    <li>
-      <h2>{{ group[0] }}</h2>
-      <ul>
-        {% for post in group[1] %}
-          <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+            {% if post_folder == target_folder %}
+                {% assign folder_posts = folder_posts | push: post %}
+            {% endif %}
         {% endfor %}
-      </ul>
-    </li>
-  {% endfor %}
-</ul>
 
-    </div>
+        <!-- Group by subfolder -->
+        {% assign grouped_posts = "" | split: "" %}
 
+        {% for post in folder_posts %}
+            {% assign post_parts = post.path | split: "/" %}
+            {% assign subfolder = post_parts[2] | default: "Uncategorized" %}
 
-    {% include foot.html %}
+            {% capture group_key %}{{ subfolder }}{% endcapture %}
+            {% assign existing_group = false %}
+
+            {% for group in grouped_posts %}
+                {% if group[0] == group_key %}
+                    {% assign existing_group = true %}
+                    {% break %}
+                {% endif %}
+            {% endfor %}
+
+            {% if existing_group %}
+                {% assign grouped_posts[group_key] = grouped_posts[group_key] | push: post %}
+            {% else %}
+                {% assign grouped_posts = grouped_posts | push: group_key %}
+                {% assign grouped_posts[group_key] = "" | split: "" | push: post %}
+            {% endif %}
+        {% endfor %}
+
+        <!-- Display grouped posts -->
+        {% for group in grouped_posts %}
+            <li>
+                <h2>{{ group }}</h2>
+                <ul>
+                    {% for post in grouped_posts[group] %}
+                        <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+
+</div>
+
+{% include foot.html %}
+
+</body>
+</html>
