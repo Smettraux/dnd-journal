@@ -1,41 +1,44 @@
 <div class="articles">
 
   {% assign subfolders = "" | split: "" %}
-{% assign posts_by_folder = "" | split: "" %}
-<!-- Step 1: Collect subfolders and group posts -->
-{% for post in site.posts %}
-  {% assign parts = post.path | split: "/" %}
-  {% assign folder = parts[1] %}  <!-- Extracts subfolder -->
-  {% unless subfolders contains folder %}
-    {% assign subfolders = subfolders | push: folder %}
-    {% assign posts_by_folder = posts_by_folder | push: folder | append: ":" %}
-  {% endunless %}
-  {% for item in posts_by_folder %}
-    {% assign folder_name = item | split: ":" | first %}
-    {% assign post_list = item | split: ":" | last %}
-    {% if folder_name == folder %}
-      {% assign post_list = post_list | append: post.id | append: "," %}
-      {% assign posts_by_folder = posts_by_folder | replace: item, folder_name | append: ":" | append: post_list %}
-    {% endif %}
+
+  <!-- Step 1: Collect unique subfolders -->
+  {% for post in site.posts %}
+    {% assign parts = post.path | split: "/" %}
+    {% assign folder = parts[1] %}  <!-- Extract subfolder name -->
+
+    {% unless subfolders contains folder %}
+      {% assign subfolders = subfolders | push: folder %}
+    {% endunless %}
   {% endfor %}
-{% endfor %}
-<!-- Step 2: Display the grouped posts -->
-{% for folder in subfolders %}
-  <h2>{{ folder }}</h2>
-  <ul>
-    {% for item in posts_by_folder %}
-      {% assign folder_name = item | split: ":" | first %}
-      {% assign post_list = item | split: ":" | last | split: "," %}
-      {% if folder_name == folder %}
-        {% for post_id in post_list %}
-          {% for post in site.posts %}
-            {% if post.id == post_id %}
-              <li><a href="{{ post.url }}">{{ post.title }}</a></li>
-            {% endif %}
-          {% endfor %}
-        {% endfor %}
-      {% endif %}
-    {% endfor %}
-  </ul>
-{% endfor %}
+
+  <!-- Step 2: Reverse subfolders order -->
+  {% assign subfolders = subfolders | reverse %}
+
+  <!-- Step 3: Loop through subfolders and display posts in reverse order -->
+  {% for folder in subfolders %}
+    <h2>{{ folder }}</h2>
+    <ul>
+      {% assign folder_posts = "" | split: "" %}
+
+      {% for post in site.posts %}
+        {% assign parts = post.path | split: "/" %}
+        {% assign post_folder = parts[1] %}
+
+        {% if post_folder == folder %}
+          {% assign folder_posts = folder_posts | push: post %}
+        {% endif %}
+      {% endfor %}
+
+      <!-- Reverse the posts inside the folder -->
+      {% assign folder_posts = folder_posts | reverse %}
+
+      {% for post in folder_posts %}
+        <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+      {% endfor %}
+    </ul>
+  {% endfor %}
+
 </div>
+
+
