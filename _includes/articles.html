@@ -11,7 +11,7 @@
     <h2>{{ folder }}</h2>
     <ul>
       <!-- Trier les articles par date (les plus récents en premier) -->
-      {% assign sorted_posts = folder_group.items | sort: "date" | reverse %}
+      {% assign sorted_posts = folder_group.items | sort: "date" | map: "date" | reverse %}
       {% for post in sorted_posts %}
         <li><a href="/dnd-journal/{{ post.url }}">{{ post.title }}</a></li>
       {% endfor %}
