@@ -31,8 +31,7 @@
         {% endif %}
       {% endfor %}
 
-      <!-- Reverse the posts inside the folder to display the most recent posts first -->
-      {% assign folder_posts = folder_posts | reverse %}
+      <!-- Reverse the posts inside the folder -->
       {% assign folder_posts = folder_posts | reverse %}
 
       {% for post in folder_posts %}
