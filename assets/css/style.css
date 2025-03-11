@@ -141,6 +141,26 @@ list-style-type: none;
 padding-right: 20px;
 }
 
+blockquote {
+  font: 14px/20px italic Times, serif;
+  padding: 8px;
+  background-color: #faebbc;
+  border-top: 1px solid #e1cc89;
+  border-bottom: 1px solid #e1cc89;
+  margin: 5px;
+  background-image: url(img/openquote1.png);
+  background-position: top left;
+  background-repeat: no-repeat;
+  text-indent: 23px;
+}
+
+blockquote p {
+  display: block;
+  background-image: url(img/closequote1.png);
+  background-repeat: no-repeat;
+  background-position: bottom right;
+}
+
 @media only screen
 and (min-device-width : 768px)  {
   .threecol {
