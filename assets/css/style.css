@@ -95,6 +95,7 @@ p::selection{
   text-align: justify;
 
   background: rgba(255, 255, 255, 0.555);
+  padding: 1em;
 }
 
 hr.double {
