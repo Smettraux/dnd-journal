@@ -18,31 +18,16 @@ title: {{ page.folder }}
     {% assign target_folder = page.folder %}
     <h1>{{ target_folder }}</h1>
 
-    {% comment %} Étape 1 : Filtrer les articles du dossier cible {% endcomment %}
     {% assign folder_posts = site.posts | where_exp: "post", "post.path contains target_folder" %}
 
-    {% comment %} Étape 2 : Regrouper par sous-dossier (ou "Sans catégorie" si pas de sous-dossier) {% endcomment %}
-    {% assign grouped_posts = folder_posts | group_by_exp: "post", "
-        post.path | split: '/' | size > 2
-        ? post.path | split: '/' | slice: 2, 1 | first
-        : 'Sans catégorie'
-    " %}
+    {% assign sorted_posts = folder_posts | sort: "date" | reverse %}
 
-    {% comment %} Étape 3 : Afficher les articles groupés {% endcomment %}
     <ul>
-      {% for group in grouped_posts %}
-      <li>
-        <h2>{{ group.name }}</h2>
-        <ul>
-          {% assign sorted_posts = group.items | sort: "date" | reverse %}
-          {% for post in sorted_posts %}
-          <li><a href="{{ post.url }}">{{ post.title }}</a></li>
-          {% endfor %}
-        </ul>
-      </li>
-      {% endfor %}
+        {% for post in sorted_posts %}
+            <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+        {% endfor %}
     </ul>
-  </div>
+</div>
 
   {% include foot.html %}
 </body>
