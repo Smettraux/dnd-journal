@@ -4,11 +4,13 @@ title: {{ page.folder }}
 
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>{{ page.title }}</title>
   {% include header.html %}
   {% seo %}
 </head>
+
 <body>
   {% include nav.html %}
 
@@ -16,63 +18,33 @@ title: {{ page.folder }}
     {% assign target_folder = page.folder %}
     <h1>{{ target_folder }}</h1>
 
-    {% comment %}
-    Step 1: Filter posts inside the target folder.
-    {% endcomment %}
-    {% assign folder_posts = "" | split: "" %}
-    {% for post in site.posts %}
-      {% assign parts = post.path | split: "/" %}
-      {%- comment -%}
-      Here we assume:
-       - For posts in "3. Personnages": parts[0] = "3. Personnages"
-       - For nested posts: parts[0] = "3. Personnages", parts[1] = subfolder, parts[2] = filename
-      {%- endcomment -%}
-      {% if parts[0] == target_folder %}
-        {% assign folder_posts = folder_posts | push: post %}
-      {% endif %}
-    {% endfor %}
+    {% comment %} Étape 1 : Filtrer les articles du dossier cible {% endcomment %}
+    {% assign folder_posts = site.posts | where_exp: "post", "post.path contains target_folder" %}
 
-    {% comment %}
-    Step 2: Group posts by subfolder.
-      - If only 2 parts, group as "Uncategorized"
-      - If more than 2 parts, group using parts[1] as the subfolder.
-    {% endcomment %}
-    {% assign groups = {} %}
-    {% for post in folder_posts %}
-      {% assign parts = post.path | split: "/" %}
-      {% if parts.size == 2 %}
-        {% assign group_key = "Uncategorized" %}
-      {% else %}
-        {% assign group_key = parts[1] %}
-      {% endif %}
+    {% comment %} Étape 2 : Regrouper par sous-dossier (ou "Sans catégorie" si pas de sous-dossier) {% endcomment %}
+    {% assign grouped_posts = folder_posts | group_by_exp: "post", "
+        post.path | split: '/' | size > 2
+        ? post.path | split: '/' | slice: 2, 1 | first
+        : 'Sans catégorie'
+    " %}
 
-      {% if groups[group_key] %}
-        {% assign groups[group_key] = groups[group_key] | push: post %}
-      {% else %}
-        {% comment %}
-        Create a new array with the post.
-        {% endcomment %}
-        {% assign groups = groups | merge: {{ group_key | jsonify }}: [post] %}
-      {% endif %}
-    {% endfor %}
-
-    {% comment %}
-    Step 3: Display the grouped posts.
-    {% endcomment %}
+    {% comment %} Étape 3 : Afficher les articles groupés {% endcomment %}
     <ul>
-      {% for group in groups %}
-        <li>
-          <h2>{{ group[0] }}</h2>
-          <ul>
-            {% for post in group[0] %}
-              <li><a href="{{ post.url }}">{{ post.title }}</a></li>
-            {% endfor %}
-          </ul>
-        </li>
+      {% for group in grouped_posts %}
+      <li>
+        <h2>{{ group.name }}</h2>
+        <ul>
+          {% assign sorted_posts = group.items | sort: "date" | reverse %}
+          {% for post in sorted_posts %}
+          <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </li>
       {% endfor %}
     </ul>
   </div>
 
   {% include foot.html %}
 </body>
+
 </html>
