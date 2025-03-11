@@ -1,6 +1,6 @@
 <div class="articles">
 
-  {% assign subfolders = [] %}
+  {% assign subfolders = "" | split: "" %}
 
   <!-- Step 1: Collect unique subfolders -->
   {% for post in site.posts %}
@@ -8,26 +8,25 @@
     {% assign folder = parts[1] %}  <!-- Extract subfolder name -->
 
     {% unless subfolders contains folder %}
-      {% assign subfolders = subfolders | concat: folder %}
+      {% assign subfolders = subfolders | push: folder %}
     {% endunless %}
   {% endfor %}
 
   <!-- Step 2: Reverse subfolders order -->
-  <!-- Reverse the order of subfolders to display the latest first -->
   {% assign subfolders = subfolders | reverse %}
 
   <!-- Step 3: Loop through subfolders and display posts in reverse order -->
   {% for folder in subfolders %}
     <h2>{{ folder }}</h2>
     <ul>
-      {% assign folder_posts = [] %}
+      {% assign folder_posts = "" | split: "" %}
 
       {% for post in site.posts %}
         {% assign parts = post.path | split: "/" %}
         {% assign post_folder = parts[1] %}
 
         {% if post_folder == folder %}
-          {% assign folder_posts = folder_posts | concat: post %}
+          {% assign folder_posts = folder_posts | push: post %}
         {% endif %}
       {% endfor %}
 
