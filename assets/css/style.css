@@ -148,7 +148,7 @@ blockquote {
   border-top: 1px solid #e1cc89;
   border-bottom: 1px solid #e1cc89;
   margin: 5px;
-  background-image: url(img/openquote1.png);
+  background-image: url(/assets/img/openquote1.png);
   background-position: top left;
   background-repeat: no-repeat;
   text-indent: 23px;
@@ -156,7 +156,7 @@ blockquote {
 
 blockquote p {
   display: block;
-  background-image: url(img/closequote1.png);
+  background-image: url(/assets/img/closequote1.png);
   background-repeat: no-repeat;
   background-position: bottom right;
 }
