@@ -22,7 +22,7 @@
       {% assign folder_posts = "" | split: "" %}
 
       {% for post in site.posts %}
-        {% assign parts = post.path  %}
+        {% assign parts = post.path | split: "-" %}
         {% assign post_folder = parts[1] %}
 
         {% if post_folder == folder %}
