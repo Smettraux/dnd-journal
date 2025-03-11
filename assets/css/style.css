@@ -150,6 +150,7 @@ blockquote {
   background-image: url(/dnd-journal/assets/img/openquote1.png);
   background-position: top left;
   background-repeat: no-repeat;
+  background-size: 20px;
   text-indent: 23px;
 }
 
@@ -158,6 +159,7 @@ blockquote p {
   background-image: url(/dnd-journal/assets/img/closequote1.png);
   background-repeat: no-repeat;
   background-position: bottom right;
+  background-size: 20px;
 }
 
 @media only screen
