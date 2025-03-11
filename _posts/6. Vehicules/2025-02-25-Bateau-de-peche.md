@@ -2,7 +2,7 @@
 layout: post
 title:  "Véhicule - Bateau de pêche"
 date:   2025-02-11 15:49:05 +0100
-category: Véhicule Bateau
+category: Véhicule
 ---
 
 # Bateau de pêche

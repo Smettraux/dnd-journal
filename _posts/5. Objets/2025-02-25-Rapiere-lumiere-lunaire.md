@@ -2,7 +2,7 @@
 layout: post
 title:  "Objet - Rapière de lumière lunaire"
 date:   2025-02-11 15:49:05 +0100
-category: Objet Armement
+category: Objet
 ---
 
 # Rapière de lumière lunaire
