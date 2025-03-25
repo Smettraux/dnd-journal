@@ -162,6 +162,10 @@ blockquote p {
   background-size: 20px;
 }
 
+table {
+  width: 100%;
+}
+
 @media only screen
 and (min-device-width : 768px)  {
   .threecol {
