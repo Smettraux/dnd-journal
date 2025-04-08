@@ -91,7 +91,7 @@ p::selection{
   text-align: right;
 }
 
-.justify {
+.justify, .articles {
   text-align: justify;
   background: rgba(255, 255, 255, 0.555);
   padding: 12px;
